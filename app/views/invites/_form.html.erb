@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :organization_id %><br>
-    <%= f.number_field :organization_id %>
+    <%= f.collection_select :organization_id, current_user.organizations, :id, :login %>
   </div>
   <div class="field">
     <%= f.label :team_id %><br>
