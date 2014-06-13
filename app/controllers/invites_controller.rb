@@ -1,5 +1,5 @@
 class InvitesController < ApplicationController
-  before_action :authenticate!
+  before_action :authenticate!, except: [:show]
   before_action :set_invite, only: [:show]
 
   def show
@@ -11,6 +11,7 @@ class InvitesController < ApplicationController
 
   def create
     @invite = Invite.new(invite_params)
+    @invite.user = current_user
 
     if @invite.save
       redirect_to @invite, notice: 'Invite was successfully created.'
@@ -27,6 +28,6 @@ class InvitesController < ApplicationController
   end
 
   def invite_params
-    params.require(:invite).permit(:organization_id, :organization_name, :team_id, :team_name, :user_id)
+    params.require(:invite).permit(:organization_id, :team_id)
   end
 end
