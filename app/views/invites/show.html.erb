@@ -1,12 +1,12 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<div class="share-box">
-  <p>
-    Share this URL with others to have them be automatically added to <span class="mention">@<%= @invite.organization_login %>/<%= @invite.team_name %></span>:
-  </p>
-  <p>
-    <span class="url">
-      <%= invite_url(@invite) %>
-    </span>
-  </p>
+  <div class="share-box">
+    <p>
+      Share this URL with others to have them be automatically added to <span class="mention">@<%= @invite.organization_login %>/<%= @invite.team_name %></span>:
+    </p>
+    <p>
+      <pre class="url"><%= invite_url(@invite) %></pre>
+    </p>
+  </div>
 </div>
