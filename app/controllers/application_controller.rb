@@ -10,4 +10,10 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !!current_user
   end
+
+  def authenticate!
+    unless logged_in?
+      redirect_to '/auth/github'
+    end
+  end
 end

@@ -3,3 +3,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   secret = ENV['GITHUB_SECRET'] || raise("Please set GITHUB_SECRET")
   provider :github, key, secret
 end
+
+if Rails.env.test?
+  OmniAuth.config.test_mode = true
+end

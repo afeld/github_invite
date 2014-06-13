@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe "Invites", :type => :request do
-  describe "GET /invites" do
-    it "works! (now write some real specs)" do
+describe 'Invites' do
+  describe 'GET /' do
+    it "redirects to auth" do
       get invites_path
-      expect(response.status).to be(200)
+      expect(response.status).to redirect_to('/auth/github')
     end
   end
 end
