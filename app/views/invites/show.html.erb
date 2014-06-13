@@ -1,6 +1,8 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <p class="notice bg-success"><%= notice %></p>
+<% end %>
 
 <p class="lead">
-  Share this URL with others to have them be automatically added to <span class="mention">@<%= @invite.organization_login %>/<%= @invite.team_name %></span>:
+  Share this URL with others to have them be automatically added to <span class="mention">@<%= @invite.organization_login %>/<%= @invite.team_name %></span>.
 </p>
 <pre class="url"><%= invite_url(@invite) %></pre>
