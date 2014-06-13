@@ -5,7 +5,7 @@ describe 'invites' do
     let(:invite) { create_invite }
 
     def visit_invite
-      get "/#{invite.id}"
+      get "/#{invite.key}"
     end
 
     it "forces the visitor to be logged in" do

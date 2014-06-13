@@ -2,7 +2,7 @@ class InvitesController < ApplicationController
   before_action :authenticate!
 
   def show
-    @invite = Invite.find(params[:id])
+    @invite = Invite.friendly.find(params[:id])
     if @invite.user == current_user
       # show the page
     else

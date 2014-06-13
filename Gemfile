@@ -4,6 +4,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'friendly_id'
 gem 'jquery-rails'
 gem 'octokit'
 gem 'omniauth'

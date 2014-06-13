@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613042225) do
+ActiveRecord::Schema.define(version: 20140613172343) do
 
   create_table "invites", force: true do |t|
     t.integer  "organization_id"
@@ -21,7 +21,10 @@ ActiveRecord::Schema.define(version: 20140613042225) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "key"
   end
+
+  add_index "invites", ["key"], name: "index_invites_on_key"
 
   create_table "users", force: true do |t|
     t.integer  "github_id"
