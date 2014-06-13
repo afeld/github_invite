@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'pg'
 gem 'rails', '4.1.1'
 gem 'sass-rails', '~> 4.0.3'
 gem 'turbolinks'
@@ -20,13 +21,13 @@ group :development do
   gem 'spring'
 end
 
-group :production do
-  gem 'pg'
-end
-
 group :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'simplecov', require: false
   gem 'webmock'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
