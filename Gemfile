@@ -19,6 +19,7 @@ group :development do
   gem 'spring'
 end
 
-group :development, :test do
+group :test do
   gem 'rspec-rails'
+  gem 'simplecov', require: false
 end
