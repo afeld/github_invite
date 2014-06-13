@@ -1,3 +1,23 @@
-// Place all the styles related to the Invites controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.share-box {
+  font-size: 1.8em;
+  margin: 100px auto;
+  text-align: center;
+  width: 800px;
+
+  p {
+    margin-bottom: 40px;
+  }
+}
+
+.mention {
+  font-weight: bold;
+}
+
+.url {
+  background-color: #F3F3F3;
+  border: 2px solid #A5A5A5;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 2em;
+  padding: 15px;
+}
