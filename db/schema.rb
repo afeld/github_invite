@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140613172343) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "invites", force: true do |t|
     t.integer  "organization_id"
     t.string   "organization_login"
@@ -24,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140613172343) do
     t.string   "key"
   end
 
-  add_index "invites", ["key"], name: "index_invites_on_key"
+  add_index "invites", ["key"], name: "index_invites_on_key", using: :btree
 
   create_table "users", force: true do |t|
     t.integer  "github_id"

@@ -11,7 +11,6 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'rails', '4.1.1'
 gem 'sass-rails', '~> 4.0.3'
-gem 'sqlite3'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
@@ -19,6 +18,10 @@ group :development do
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'spring'
+end
+
+group :production do
+  gem 'pg'
 end
 
 group :test do

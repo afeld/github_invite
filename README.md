@@ -4,6 +4,8 @@ App to enable GitHub users to easily add others to their organization teams.
 
 ## Running locally
 
+Requires [Ruby](https://www.ruby-lang.org) 1.9.3+ and [PostgreSQL](http://www.postgresql.org).
+
 ### Server
 
 1. [Create a new application](https://github.com/settings/applications/new), and grab the "Client ID" and "Client Secret".
