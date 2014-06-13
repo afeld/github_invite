@@ -1,4 +1,7 @@
-<h1>New invite</h1>
+<h1>GitHub Invite</h1>
+<p>
+  Adding large numbers of people to a GitHub organization is a pain.  You need to collect their GitHub usernames, though they might not be signed up yet. <strong>GitHub Invite</strong> generates a unique URL that you can send to your group, and when they click through, they will be automatically added to the team you select below.
+</p>
 
 <%= form_for(@invite) do |f| %>
   <% if @invite.errors.any? %>
@@ -13,11 +16,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :team_id %><br>
-    <%= f.select :team_id, grouped_options_for_select(current_user.teams_by_org) %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.label :team_id %>:
+  <%= f.select :team_id, grouped_options_for_select(current_user.teams_by_org) %>
+  <%= f.submit %>
 <% end %>
