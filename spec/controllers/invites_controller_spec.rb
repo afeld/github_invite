@@ -8,10 +8,7 @@ describe InvitesController do
     end
 
     it "displays the page when logged in" do
-      user = User.create!(
-        github_id: 123,
-        github_username: 'testuser'
-      )
+      user = create(:user)
       session[:user_id] = user.id
 
       get :new

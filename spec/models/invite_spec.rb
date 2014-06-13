@@ -3,8 +3,7 @@ require 'rails_helper'
 describe Invite do
   describe 'defaults' do
     it "sets the organization info on create" do
-      user = User.create!(github_id: 1, github_username: 'testuser')
-      invite = Invite.new(team_id: 2, user: user)
+      invite = build(:invite)
 
       allow(invite).to receive_message_chain('organization.id').and_return(3)
       allow(invite).to receive_message_chain('organization.login').and_return('testorg')
