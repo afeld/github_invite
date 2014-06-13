@@ -20,7 +20,7 @@ class Invite < ActiveRecord::Base
   def update_info_if_team_changed
     if team_id && team_id_changed?
       self.organization_id = organization.id
-      self.organization_name = organization.login
+      self.organization_login = organization.login
       self.team_name = team.name
     end
   end
