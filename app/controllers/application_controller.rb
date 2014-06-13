@@ -12,9 +12,13 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  def auth_path
+    '/auth/github'
+  end
+
   def authenticate!
     unless logged_in?
-      redirect_to '/auth/github'
+      redirect_to auth_path
     end
   end
 end
