@@ -12,12 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :organization_id %><br>
-    <%= f.collection_select :organization_id, current_user.organizations, :id, :login %>
-  </div>
-  <div class="field">
     <%= f.label :team_id %><br>
-    <%= f.number_field :team_id %>
+    <%= f.select :team_id, grouped_options_for_select(current_user.teams_by_org) %>
   </div>
   <div class="actions">
     <%= f.submit %>

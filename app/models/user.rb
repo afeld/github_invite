@@ -13,6 +13,19 @@ class User < ActiveRecord::Base
     @organizations ||= client.organizations
   end
 
+  def teams_for_org(org)
+    client.organization_teams(org.login)
+  end
+
+  # for grouped_options_for_select()
+  def teams_by_org
+    organizations.map do |org|
+      teams = teams_for_org(org)
+      team_pairs = teams.map {|team| [team.name, team.id] }
+      [org.login, team_pairs]
+    end
+  end
+
   def self.find_or_create_from_auth_hash(auth_hash)
     user = self.find_or_initialize_by(github_id: auth_hash['uid'])
     # set/update fields
