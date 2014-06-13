@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :invites
+  resources :invites, only: [:create, :show]
+  root to: 'invites#new'
 
   get '/auth/:provider/callback', to: 'sessions#create'
 end
