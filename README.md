@@ -1,4 +1,4 @@
-# GitHub Invite
+# GitHub Invite [![Build Status](https://travis-ci.org/afeld/github_invite.svg?branch=master)](https://travis-ci.org/afeld/github_invite)
 
 App to enable GitHub users to easily add others to their organization teams.
 
