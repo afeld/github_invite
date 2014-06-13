@@ -28,6 +28,6 @@ class InvitesController < ApplicationController
   end
 
   def invite_params
-    params.require(:invite).permit(:organization_id, :team_id)
+    params.require(:invite).permit(:team_id)
   end
 end

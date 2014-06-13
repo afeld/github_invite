@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :invites
+  has_many :invites, dependent: :destroy
 
   validates :github_id, presence: true
   validates :github_username, presence: true
