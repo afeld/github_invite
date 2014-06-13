@@ -1,8 +1,14 @@
 class InvitesController < ApplicationController
-  before_action :authenticate!, except: [:show]
-  before_action :set_invite, only: [:show]
+  before_action :authenticate!
 
   def show
+    @invite = Invite.find(params[:id])
+    if @invite.user == current_user
+      # show the page
+    else
+      @invite.add_to_team(current_user)
+      redirect_to @invite.organization_url
+    end
   end
 
   def new
@@ -22,10 +28,6 @@ class InvitesController < ApplicationController
 
 
   private
-
-  def set_invite
-    @invite = Invite.find(params[:id])
-  end
 
   def invite_params
     params.require(:invite).permit(:team_id)

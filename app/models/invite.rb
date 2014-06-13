@@ -14,6 +14,14 @@ class Invite < ActiveRecord::Base
     @organization ||= team.organization
   end
 
+  def add_to_team(other)
+    user.client.add_team_member(team_id, other.github_username)
+  end
+
+  def organization_url
+    "https://github.com/#{organization_login}"
+  end
+
 
   protected
 
