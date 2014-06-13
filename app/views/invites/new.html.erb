@@ -16,7 +16,16 @@
     </div>
   <% end %>
 
-  <%= f.label :team_id %>:
-  <%= f.select :team_id, grouped_options_for_select(current_user.teams_by_org) %>
-  <%= f.submit %>
+  <% current_user.teams_by_org.each do |org, teams| %>
+    <h2>@<%= org.login %></h2>
+    <ul>
+      <% teams.each do |team| %>
+        <li>
+          <%= f.button name: 'invite[team_id]', value: team.id do %>
+            <%= team.name %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 <% end %>

@@ -17,13 +17,13 @@ class User < ActiveRecord::Base
     client.organization_teams(org.login)
   end
 
-  # for grouped_options_for_select()
   def teams_by_org
-    organizations.map do |org|
+    results = {}
+    organizations.each do |org|
       teams = teams_for_org(org)
-      team_pairs = teams.map {|team| [team.name, team.id] }
-      [org.login, team_pairs]
+      results[org] = teams
     end
+    results
   end
 
   def self.find_or_create_from_auth_hash(auth_hash)
