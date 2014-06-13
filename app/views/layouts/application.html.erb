@@ -7,8 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="_<%= params[:action] %>">
-
-<%= yield %>
-
+  <div class="container">
+    <h1>GitHub Invite</h1>
+    <%= yield %>
+  </div>
 </body>
 </html>

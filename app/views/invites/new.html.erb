@@ -1,33 +1,30 @@
-<div class="container">
-  <h1>GitHub Invite</h1>
-  <p>
-    Adding large numbers of people to a GitHub organization is a pain.  You need to collect their GitHub usernames, though they might not be signed up yet. <strong>GitHub Invite</strong> generates a unique URL that you can send to your group, and when they click through, they will be automatically added to the team you select below.
-  </p>
+<p>
+  Adding large numbers of people to a GitHub organization is a pain.  You need to collect their GitHub usernames, though they might not be signed up yet. <strong>GitHub Invite</strong> generates a unique URL that you can send to your group, and when they click through, they will be automatically added to the team you select below.
+</p>
 
-  <%= form_for(@invite) do |f| %>
-    <% if @invite.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@invite.errors.count, "error") %> prohibited this invite from being saved:</h2>
+<%= form_for(@invite) do |f| %>
+  <% if @invite.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invite.errors.count, "error") %> prohibited this invite from being saved:</h2>
 
-        <ul>
-        <% @invite.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <% current_user.teams_by_org.each do |org, teams| %>
-      <h2>@<%= org.login %></h2>
       <ul>
-        <% teams.each do |team| %>
-          <li>
-            <%= f.button class: 'btn btn-default', name: 'invite[team_id]', value: team.id do %>
-              <%= team.name %>
-            <% end %>
-          </li>
-        <% end %>
+      <% @invite.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
       </ul>
-    <% end %>
+    </div>
   <% end %>
-</div>
+
+  <% current_user.teams_by_org.each do |org, teams| %>
+    <h2>@<%= org.login %></h2>
+    <ul>
+      <% teams.each do |team| %>
+        <li>
+          <%= f.button class: 'btn btn-default', name: 'invite[team_id]', value: team.id do %>
+            <%= team.name %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
