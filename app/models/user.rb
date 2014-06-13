@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   end
 
   def teams_for_org(org)
-    client.organization_teams(org.login)
+    client.organization_teams(org.login).sort_by{|team| team.name.downcase }
   end
 
   def teams_by_org
