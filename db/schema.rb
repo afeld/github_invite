@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612230229) do
+ActiveRecord::Schema.define(version: 20140613030547) do
 
   create_table "invites", force: true do |t|
     t.integer  "organization_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140612230229) do
     t.string   "github_username"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "token"
   end
 
 end

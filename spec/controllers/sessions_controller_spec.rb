@@ -3,13 +3,7 @@ require 'rails_helper'
 describe SessionsController do
   describe 'GET create' do
     before do
-      request.env['omniauth.auth'] = {
-        'provider' => 'github',
-        'uid' => 123,
-        'info' => {
-          'nickname' => 'testuser'
-        }
-      }
+      request.env['omniauth.auth'] = auth_hash
     end
 
     it "creates a new user" do
@@ -19,6 +13,7 @@ describe SessionsController do
       expect(user).to_not be_nil
       expect(user.github_id).to eq(123)
       expect(user.github_username).to eq('testuser')
+      expect(user.token).to eq('abc')
     end
 
     it "uses an existing user if their ID matches" do

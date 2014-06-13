@@ -76,3 +76,16 @@ RSpec.configure do |config|
   end
 =end
 end
+
+def auth_hash
+  {
+    'provider' => 'github',
+    'uid' => 123,
+    'info' => {
+      'nickname' => 'testuser'
+    },
+    'credentials' => {
+      'token' => 'abc'
+    }
+  }
+end

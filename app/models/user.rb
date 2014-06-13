@@ -6,8 +6,9 @@ class User < ActiveRecord::Base
 
   def self.find_or_create_from_auth_hash(auth_hash)
     user = self.find_or_initialize_by(github_id: auth_hash['uid'])
-    # set/update username
+    # set/update fields
     user.github_username = auth_hash['info']['nickname']
+    user.token = auth_hash['credentials']['token']
     user.save!
 
     user
