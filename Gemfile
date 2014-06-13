@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
+gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'octokit'

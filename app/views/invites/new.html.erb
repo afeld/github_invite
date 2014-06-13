@@ -21,7 +21,7 @@
     <ul>
       <% teams.each do |team| %>
         <li>
-          <%= f.button name: 'invite[team_id]', value: team.id do %>
+          <%= f.button class: 'btn btn-default', name: 'invite[team_id]', value: team.id do %>
             <%= team.name %>
           <% end %>
         </li>
