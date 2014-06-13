@@ -13,6 +13,8 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
 group :development do
+  gem 'guard'
+  gem 'guard-rspec', require: false
   gem 'spring'
 end
 
