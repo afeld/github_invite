@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'dotenv-rails', groups: [:development, :test]
+group :development, :test do
+  gem 'dotenv'
+  gem 'dotenv-deployment'
+end
 
 gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.0.0'
