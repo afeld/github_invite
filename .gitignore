@@ -15,5 +15,5 @@
 /log/*.log
 /tmp
 
-/.env
+/.env.development
 /coverage/
