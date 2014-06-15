@@ -41,6 +41,14 @@ class Invite < ActiveRecord::Base
     potential_teams.group_by{|team| team.organization.login }
   end
 
+  def sorted_potential_teams_by_org_login
+    results = potential_teams_by_org_login
+    results.each do |org_login, teams|
+      teams.sort_by!(&:slug)
+    end
+    results.sort_by{|org_login, teams| org_login.downcase }
+  end
+
 
   protected
 

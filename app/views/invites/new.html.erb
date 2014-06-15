@@ -13,7 +13,7 @@
     </div>
   <% end %>
 
-  <% @invite.potential_teams_by_org_login.each do |org_login, teams| %>
+  <% @invite.sorted_potential_teams_by_org_login.each do |org_login, teams| %>
     <h2>@<%= org_login %></h2>
     <ul>
       <% teams.each do |team| %>
