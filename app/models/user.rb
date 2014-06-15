@@ -13,10 +13,20 @@ class User < ActiveRecord::Base
     @organizations ||= client.organizations.map{|org| Organization.from_sawyer(org) }
   end
 
-  def teams_by_org
-    results = {}
-    organizations.each do |org|
-      results[org] = org.teams(client)
+  def teams
+    @teams ||= client.user_teams.map{|team| Team.from_sawyer(team) }
+  end
+
+  def invitable_teams
+    results = []
+    teams.each do |team|
+      if team.name == 'Owners'
+        # include all teams from that organization
+        additional_teams = team.organization.teams(client)
+        results.concat(additional_teams)
+      else
+        results << team
+      end
     end
     results
   end

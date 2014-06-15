@@ -12,7 +12,7 @@ class InvitesController < ApplicationController
   end
 
   def new
-    @invite = Invite.new
+    @invite = Invite.new(user: current_user)
   end
 
   def create
