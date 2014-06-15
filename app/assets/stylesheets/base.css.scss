@@ -3,6 +3,13 @@ $font-size-h2: 26px;
 
 @import "bootstrap";
 
+h1 a {
+  &,
+  &:hover {
+    color: black;
+  }
+}
+
 footer {
   font-size: 0.8em;
   margin: 20px 0 50px;
