@@ -10,18 +10,13 @@ class User < ActiveRecord::Base
   end
 
   def organizations
-    @organizations ||= client.organizations.sort_by{|org| org.login.downcase }
-  end
-
-  def teams_for_org(org)
-    client.organization_teams(org.login).sort_by{|team| team.name.downcase }
+    @organizations ||= client.organizations.map{|org| Organization.new(id: org.id, login: org.login) }
   end
 
   def teams_by_org
     results = {}
     organizations.each do |org|
-      teams = teams_for_org(org)
-      results[org] = teams
+      results[org] = org.teams(client)
     end
     results
   end

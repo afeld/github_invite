@@ -6,18 +6,31 @@ FactoryGirl.define do
     end
   end
 
+  factory :organization do
+    skip_create
+
+    sequence :id
+    sequence :login do |n|
+      "testorg#{n}"
+    end
+  end
+
+  factory :team do
+    skip_create
+
+    sequence :id
+    sequence :name do |n|
+      "testteam#{n}"
+    end
+    organization
+  end
+
   factory :invite do
     sequence :team_id
     user
 
     factory :populated_invite do
-      sequence :team_name do |n|
-        "testteam#{n}"
-      end
-      sequence :organization_id
-      sequence :organization_login do |n|
-        "testorg#{n}"
-      end
+      team
     end
   end
 end

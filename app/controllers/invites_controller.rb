@@ -7,7 +7,7 @@ class InvitesController < ApplicationController
       # show the page
     else
       @invite.add_to_team(current_user)
-      redirect_to @invite.organization_url
+      redirect_to @invite.organization.url
     end
   end
 

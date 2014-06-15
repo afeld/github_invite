@@ -3,17 +3,16 @@ require 'rails_helper'
 describe Invite do
   describe 'defaults' do
     it "sets the organization info on create" do
+      # TODO tie these two together
       invite = build(:invite)
-
-      allow(invite).to receive_message_chain('organization.id').and_return(3)
-      allow(invite).to receive_message_chain('organization.login').and_return('testorg')
-      allow(invite).to receive_message_chain('team.name').and_return('testteam')
+      team = create(:team)
+      expect(Team).to receive(:from_api).and_return(team)
 
       invite.save!
 
-      expect(invite.organization_id).to eq(3)
-      expect(invite.organization_login).to eq('testorg')
-      expect(invite.team_name).to eq('testteam')
+      expect(invite.organization_id).to eq(team.organization.id)
+      expect(invite.organization_login).to eq(team.organization.login)
+      expect(invite.team_name).to eq(team.name)
     end
 
     it "sets the key on create" do
