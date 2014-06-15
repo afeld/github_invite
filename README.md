@@ -15,6 +15,7 @@ Requires [Ruby](https://www.ruby-lang.org) 1.9.3+ and [PostgreSQL](http://www.po
     GITHUB_KEY=...
     GITHUB_SECRET=...
     ```
+
 1. Run
 
     ```bash
@@ -31,3 +32,9 @@ bundle exec rspec
 # or
 bundle exec guard
 ```
+
+## See also
+
+* https://developer.github.com/v3/orgs/teams/#add-team-member
+* https://github.com/benbalter/add-to-org
+* https://github.com/education/teachers_pet/#giving-others-access
