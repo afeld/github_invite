@@ -32,6 +32,15 @@ class Invite < ActiveRecord::Base
     user.client.add_team_member(team_id, other.github_username)
   end
 
+  def potential_teams
+    teams = user.invitable_teams
+    teams.reject{|team| team.name == 'Owners' }
+  end
+
+  def potential_teams_by_org_login
+    potential_teams.group_by{|team| team.organization.login }
+  end
+
 
   protected
 

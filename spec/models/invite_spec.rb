@@ -24,4 +24,14 @@ describe Invite do
       expect(key.length).to eq(32)
     end
   end
+
+  describe '#potential_teams' do
+    let(:invite) { build(:invite) }
+
+    it "omits the Owners teams" do
+      team = create(:team, name: 'Owners')
+      expect(invite.user).to receive(:invitable_teams).and_return([team])
+      expect(invite.potential_teams).to be_empty
+    end
+  end
 end

@@ -16,8 +16,8 @@
     </div>
   <% end %>
 
-  <% current_user.teams_by_org.each do |org, teams| %>
-    <h2>@<%= org.login %></h2>
+  <% @invite.potential_teams_by_org_login.each do |org_login, teams| %>
+    <h2>@<%= org_login %></h2>
     <ul>
       <% teams.each do |team| %>
         <li>
@@ -27,7 +27,7 @@
         </li>
       <% end %>
       <li>
-        <a href="https://github.com/orgs/<%= org.login %>/new-team" class="btn btn-default">
+        <a href="https://github.com/orgs/<%= org_login %>/new-team" class="btn btn-default">
           <span class="glyphicon glyphicon-plus"></span>
         </a>
       </li>
