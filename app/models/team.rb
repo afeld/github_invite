@@ -3,8 +3,12 @@ class Team
 
   attr_accessor :id, :name, :organization
 
+  def slug
+    name.parameterize
+  end
+
   def url
-    "https://github.com/orgs/#{organization.login}/teams/#{name}"
+    "https://github.com/orgs/#{organization.login}/teams/#{slug}"
   end
 
   def self.from_sawyer(sawyer_team)
