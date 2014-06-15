@@ -19,13 +19,28 @@ describe 'invites' do
       expect(response.status).to eq(200)
     end
 
-    it "adds the visitor to the team" do
-      visitor = create(:user)
-      sign_in(visitor)
-      stub_request(:put, "https://api.github.com/teams/#{invite.team_id}/members/#{visitor.github_username}")
+    context "visitor" do
+      let(:visitor) { create(:user) }
 
-      visit_invite
-      expect(response).to redirect_to("https://github.com/#{invite.organization_login}")
+      def stub_add
+        stub_request(:put, "https://api.github.com/teams/#{invite.team_id}/members/#{visitor.github_username}")
+      end
+
+      before do
+        sign_in(visitor)
+      end
+
+      it "adds them to the team" do
+        stub_add.to_return(status: 204)
+        visit_invite
+        expect(response).to redirect_to("https://github.com/#{invite.organization_login}")
+      end
+
+      it "shows an error if unable to add them" do
+        stub_add.to_return(status: 404)
+        visit_invite
+        expect(response.status).to eq(503)
+      end
     end
   end
 end

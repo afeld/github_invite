@@ -6,8 +6,11 @@ class InvitesController < ApplicationController
     if @invite.user == current_user
       # show the page
     else
-      @invite.add_to_team(current_user)
-      redirect_to @invite.organization.url
+      if @invite.add_to_team(current_user)
+        redirect_to @invite.organization.url
+      else
+        render 'fail', status: 503
+      end
     end
   end
 
