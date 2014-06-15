@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   end
 
   def organizations
-    @organizations ||= client.organizations.map{|org| Organization.new(id: org.id, login: org.login) }
+    @organizations ||= client.organizations.map{|org| Organization.from_sawyer(org) }
   end
 
   def teams_by_org

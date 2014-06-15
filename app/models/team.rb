@@ -3,9 +3,17 @@ class Team
 
   attr_accessor :id, :name, :organization
 
+  def self.from_sawyer(sawyer_team)
+    team = Team.new(id: sawyer_team.id, name: sawyer_team.name)
+    sawyer_org = sawyer_team.organization
+    if sawyer_org
+      team.organization = Organization.from_sawyer(sawyer_org)
+    end
+    team
+  end
+
   def self.from_api(team_id, client)
     team = client.team(team_id)
-    org = Organization.new(id: team.organization.id, login: team.organization.login)
-    Team.new(id: team.id, name: team.name, organization: org)
+    from_sawyer(team)
   end
 end
