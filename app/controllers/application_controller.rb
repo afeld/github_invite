@@ -12,13 +12,13 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
-  def auth_path
-    '/auth/github'
+  def auth_path(query={})
+    "/auth/github?#{query.to_query}"
   end
 
   def authenticate!
     unless logged_in?
-      redirect_to auth_path
+      redirect_to auth_path(origin: request.path)
     end
   end
 end

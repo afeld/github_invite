@@ -2,7 +2,8 @@ class SessionsController < ApplicationController
   def create
     user = User.find_or_create_from_auth_hash(auth_hash)
     self.current_user = user
-    redirect_to root_path
+    url = request.env['omniauth.origin'] || new_invite_url
+    redirect_to(url)
   end
 
 
