@@ -32,13 +32,13 @@ class Invite < ActiveRecord::Base
     user.client.add_team_member(team_id, other.github_username)
   end
 
-  def potential_teams
-    teams = user.invitable_teams
-    teams.reject{|team| team.name == 'Owners' }
-  end
-
   def potential_teams_by_org_login
-    potential_teams.group_by{|team| team.organization.login }
+    results = user.invitable_teams.group_by{|team| team.organization.login }
+    # exclude Owners teams – would this make more sense in the view?
+    results.each do |org_login, teams|
+      teams.delete_if{|team| team.name == 'Owners' }
+    end
+    results
   end
 
   def sorted_potential_teams_by_org_login
