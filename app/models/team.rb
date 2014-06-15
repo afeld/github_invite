@@ -1,5 +1,5 @@
 class Team
-  include ActiveModel::Model
+  include Octoclass
 
   attr_accessor :id, :name, :organization
 
@@ -12,7 +12,7 @@ class Team
   end
 
   def self.from_sawyer(sawyer_team)
-    team = Team.new(id: sawyer_team.id, name: sawyer_team.name)
+    team = self.new(id: sawyer_team.id, name: sawyer_team.name)
     sawyer_org = sawyer_team.organization
     if sawyer_org
       team.organization = Organization.from_sawyer(sawyer_org)

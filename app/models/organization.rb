@@ -1,5 +1,5 @@
 class Organization
-  include ActiveModel::Model
+  include Octoclass
 
   attr_accessor :id, :login
 

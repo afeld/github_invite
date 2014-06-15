@@ -18,17 +18,17 @@ class User < ActiveRecord::Base
   end
 
   def invitable_teams
-    results = []
+    results = Set.new
     teams.each do |team|
       if team.name == 'Owners'
         # include all teams from that organization
         additional_teams = team.organization.teams(client)
-        results.concat(additional_teams)
+        results.merge(additional_teams)
       else
         results << team
       end
     end
-    results.uniq{|team| team.id }
+    results
   end
 
   def self.find_or_create_from_auth_hash(auth_hash)

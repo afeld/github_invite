@@ -25,13 +25,13 @@ describe Invite do
     end
   end
 
-  describe '#potential_teams_by_org_login' do
+  describe '#potential_teams_by_org' do
     let(:invite) { build(:invite) }
 
     it "omits the Owners teams" do
       team = create(:team, name: 'Owners')
       expect(invite.user).to receive(:invitable_teams).and_return([team])
-      expect(invite.potential_teams_by_org_login).to eq(team.organization.login => [])
+      expect(invite.potential_teams_by_org).to eq(team.organization => [])
     end
   end
 end
