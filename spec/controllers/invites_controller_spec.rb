@@ -4,7 +4,7 @@ describe InvitesController do
   describe 'GET new' do
     it "redirects to auth" do
       get :new
-      expect(response).to redirect_to('/auth/github')
+      expect(response).to redirect_to('/auth/github?origin=%2Finvites%2Fnew')
     end
 
     it "displays the page when logged in" do

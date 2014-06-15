@@ -10,7 +10,7 @@ describe 'invites' do
 
     it "forces the visitor to be logged in" do
       visit_invite
-      expect(response).to redirect_to('/auth/github')
+      expect(response).to redirect_to("/auth/github?origin=%2F#{invite.key}")
     end
 
     it "shows the page to the owner" do
