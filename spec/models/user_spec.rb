@@ -14,6 +14,18 @@ describe User do
       teams = user.invitable_teams
       expect(teams.map(&:name)).to eq([other.name, 'Owners'])
     end
+
+    it "only includes teams once" do
+      owners = create(:team, name: 'Owners')
+      org = owners.organization
+      other = create(:team, organization: org)
+      expect(user).to receive(:teams).and_return([owners, other])
+
+      expect(org).to receive(:teams).and_return([other, owners])
+
+      teams = user.invitable_teams
+      expect(teams.map(&:name)).to eq([other.name, 'Owners'])
+    end
   end
 
   describe '.find_or_create_from_auth_hash' do

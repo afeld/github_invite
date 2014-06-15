@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
         results << team
       end
     end
-    results
+    results.uniq{|team| team.id }
   end
 
   def self.find_or_create_from_auth_hash(auth_hash)
