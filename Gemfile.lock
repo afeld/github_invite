@@ -127,6 +127,8 @@ GEM
       byebug (~> 2.7)
       pry (~> 0.9.12)
     rack (1.5.2)
+    rack-ssl (1.4.1)
+      rack
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.1)
@@ -235,6 +237,7 @@ DEPENDENCIES
   omniauth-github
   pg
   pry-byebug
+  rack-ssl
   rails (= 4.1.1)
   rails_12factor
   rspec-rails

@@ -36,5 +36,6 @@ group :test do
 end
 
 group :production do
+  gem 'rack-ssl'
   gem 'rails_12factor'
 end
