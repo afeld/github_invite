@@ -3,6 +3,6 @@
 <% end %>
 
 <p class="lead">
-  Share this URL with others to have them be automatically added to <span class="mention">@<%= @invite.organization_login %>/<%= @invite.team_name %></span>.
+  Share this URL with others to have them be automatically added to <a href="<%= @invite.team.url %>" target="_blank" class="mention">@<%= @invite.organization_login %>/<%= @invite.team_name.downcase.gsub(/\s+/, '-') %></a>.
 </p>
 <pre class="url"><%= invite_url(@invite) %></pre>

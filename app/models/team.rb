@@ -3,6 +3,10 @@ class Team
 
   attr_accessor :id, :name, :organization
 
+  def url
+    "https://github.com/orgs/#{organization.login}/teams/#{name}"
+  end
+
   def self.from_sawyer(sawyer_team)
     team = Team.new(id: sawyer_team.id, name: sawyer_team.name)
     sawyer_org = sawyer_team.organization
