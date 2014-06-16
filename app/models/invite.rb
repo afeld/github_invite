@@ -2,6 +2,9 @@ class Invite < ActiveRecord::Base
   extend FriendlyId
   friendly_id :key
 
+  UPDATEABLE_ATTRS = %w(organization_id organization_login team_name)
+  EXPIRATION = 3.days
+
   belongs_to :user
 
   validate :organization_id, presence: true
@@ -11,7 +14,7 @@ class Invite < ActiveRecord::Base
   validate :user_id, presence: true
 
   after_initialize :assign_key
-  before_validation :update_info_if_team_changed
+  before_validation :update_attrs_if_needed
 
   def team
     Team.new(id: team_id, name: team_name, organization: organization)
@@ -28,8 +31,20 @@ class Invite < ActiveRecord::Base
     Organization.new(id: organization_id, login: organization_login)
   end
 
-  def add_to_team(other)
-    user.client.add_team_member(team_id, other.github_username)
+  def add_to_team(other_user)
+    user.client.add_team_member(team_id, other_user.github_username)
+  end
+
+  def expires_at
+    created_at + EXPIRATION
+  end
+
+  def expired?
+    Time.now > expires_at
+  end
+
+  def redeem(other_user)
+    !expired? && add_to_team(other_user)
   end
 
   def potential_teams_by_org
@@ -56,9 +71,22 @@ class Invite < ActiveRecord::Base
     self.key ||= SecureRandom.hex(16)
   end
 
-  def update_info_if_team_changed
-    if team_id && team_id_changed?
-      self.team = Team.from_api(team_id, user.client)
+  def needs_update?
+    team_id &&
+      team_id_changed? &&
+      # update from the API if the attributes weren't set/updated as well
+      (UPDATEABLE_ATTRS.any?{|a| self.send(a).nil? } ||
+        (UPDATEABLE_ATTRS - changed_attributes.keys).any?
+      )
+  end
+
+  def update_from_api
+    self.team = Team.from_api(team_id, user.client)
+  end
+
+  def update_attrs_if_needed
+    if self.needs_update?
+      self.update_from_api
     end
   end
 end

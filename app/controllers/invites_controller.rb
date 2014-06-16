@@ -3,10 +3,13 @@ class InvitesController < ApplicationController
 
   def show
     @invite = Invite.find_by!(key: params[:id])
-    if @invite.user == current_user
-      # show the page
+    if @invite.expired?
+      render 'expired', status: 410
+    elsif @invite.user == current_user
+      # inviter - show the page
     else
-      if @invite.add_to_team(current_user)
+      # invite recipient
+      if @invite.redeem(current_user)
         redirect_to @invite.organization.url
       else
         render 'fail', status: 503

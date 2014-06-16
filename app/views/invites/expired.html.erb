@@ -1,0 +1,8 @@
+<p class="notification bg-danger">
+  Sorry, this invite has expired.
+  <% if @invite.user == current_user %>
+    Please <a href="<%= new_invite_path %>">create a new one</a>.
+  <% else %>
+    Please contact an owner of the organization to request a new one.
+  <% end %>
+</p>
