@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap/tooltip
+//= require ladda-bootstrap/spin
+//= require ladda-bootstrap/ladda
 //= require_tree .
