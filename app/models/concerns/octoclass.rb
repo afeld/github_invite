@@ -3,7 +3,13 @@ module Octoclass
 
   included do
     include ActiveModel::Model
+    include Comparable
   end
+
+  def <=>(other)
+    slug.downcase <=> other.slug.downcase
+  end
+
 
   # use the :id for object identity
   # https://github.com/rails/rails/blob/952d0f8bdfa3f919794bf36049bafd2d95e3c97b/activerecord/lib/active_record/core.rb#L361-L386

@@ -11,6 +11,10 @@ class Organization
     end
   end
 
+  def slug
+    login
+  end
+
   def url
     "https://github.com/#{login}"
   end
