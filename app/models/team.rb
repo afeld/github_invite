@@ -11,6 +11,10 @@ class Team
     "https://github.com/orgs/#{organization.login}/teams/#{slug}"
   end
 
+  def owners?
+    name == 'Owners'
+  end
+
   def self.from_sawyer(sawyer_team)
     team = self.new(id: sawyer_team.id, name: sawyer_team.name)
     sawyer_org = sawyer_team.organization

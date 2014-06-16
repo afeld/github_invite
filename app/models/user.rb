@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   def invitable_teams
     results = Set.new
     teams.each do |team|
-      if team.name == 'Owners'
+      if team.owners?
         # include all teams from that organization
         additional_teams = team.organization.teams(client)
         results.merge(additional_teams)

@@ -36,7 +36,7 @@ class Invite < ActiveRecord::Base
     results = user.invitable_teams.group_by{|team| team.organization }
     # exclude Owners teams – would this make more sense in the view?
     results.each do |org, teams|
-      teams.delete_if{|team| team.name == 'Owners' }
+      teams.delete_if(&:owners?)
     end
     results
   end
