@@ -3,9 +3,12 @@ class InvitesController < ApplicationController
 
   def show
     @invite = Invite.find_by!(key: params[:id])
-    if @invite.user == current_user
-      # show the page
+    if @invite.expired?
+      render 'expired'
+    elsif @invite.user == current_user
+      # inviter - show the page
     else
+      # invite recipient
       if @invite.redeem(current_user)
         redirect_to @invite.organization.url
       else
