@@ -3,7 +3,7 @@ class Invite < ActiveRecord::Base
   friendly_id :key
 
   UPDATEABLE_ATTRS = %w(organization_id organization_login team_name)
-  EXPIRATION_DAYS = 3
+  EXPIRATION = 3.days
 
   belongs_to :user
 
@@ -36,7 +36,7 @@ class Invite < ActiveRecord::Base
   end
 
   def expires_at
-    created_at + EXPIRATION_DAYS.days
+    created_at + EXPIRATION
   end
 
   def expired?
