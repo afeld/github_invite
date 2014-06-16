@@ -13,15 +13,12 @@
     </div>
   <% end %>
 
-  <% @invite.sorted_potential_teams_by_org.each do |org, teams| %>
+  <% @invite.potential_orgs_with_teams.sort.each do |org| %>
     <h2>@<%= org.login %></h2>
     <ul>
-      <% is_owner = false %>
-      <% teams.each do |team| %>
-        <% if team.owners? %>
-          <%# exclude the Owners team %>
-          <% is_owner = true %>
-        <% else %>
+      <% org.teams.each do |team| %>
+        <%# exclude the Owners team %>
+        <% unless team.owners? %>
           <li>
             <%= f.button class: 'btn btn-default', name: 'invite[team_id]', value: team.id do %>
               <%= team.name %>
@@ -29,7 +26,7 @@
           </li>
         <% end %>
       <% end %>
-      <% if is_owner %>
+      <% if org.owner? %>
         <%# has the ability to create other teams %>
         <li>
           <a href="https://github.com/orgs/<%= org.login %>/new-team" class="btn btn-default">

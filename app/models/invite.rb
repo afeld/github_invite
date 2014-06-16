@@ -47,16 +47,11 @@ class Invite < ActiveRecord::Base
     !expired? && add_to_team(other_user)
   end
 
-  def potential_teams_by_org
-    user.invitable_teams.group_by{|team| team.organization }
-  end
-
-  def sorted_potential_teams_by_org
-    results = potential_teams_by_org
-    results.each do |org_login, teams|
-      teams.sort!
-    end
-    results.sort
+  def potential_orgs_with_teams
+    results = user.invitable_teams.group_by{|team| team.organization }
+    results.map{|org, teams|
+      OrganizationWithTeams.new(id: org.id, login: org.login, teams: teams)
+    }
   end
 
 
