@@ -3,6 +3,7 @@ class Invite < ActiveRecord::Base
   friendly_id :key
 
   UPDATEABLE_ATTRS = %w(organization_id organization_login team_name)
+  EXPIRATION_DAYS = 3
 
   belongs_to :user
 
@@ -34,8 +35,12 @@ class Invite < ActiveRecord::Base
     user.client.add_team_member(team_id, other_user.github_username)
   end
 
+  def expires_at
+    created_at + EXPIRATION_DAYS.days
+  end
+
   def expired?
-    created_at < 3.days.ago
+    Time.now > expires_at
   end
 
   def redeem(other_user)
