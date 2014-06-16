@@ -29,6 +29,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara', require: 'capybara/rspec'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'simplecov', require: false

@@ -23,6 +23,10 @@ FactoryGirl.define do
       "testteam#{n}"
     end
     organization
+
+    factory :owners_team do
+      name 'Owners'
+    end
   end
 
   factory :invite do
