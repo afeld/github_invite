@@ -4,7 +4,7 @@ class InvitesController < ApplicationController
   def show
     @invite = Invite.find_by!(key: params[:id])
     if @invite.expired?
-      render 'expired'
+      render 'expired', status: 410
     elsif @invite.user == current_user
       # inviter - show the page
     else
