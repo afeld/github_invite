@@ -13,21 +13,27 @@
     </div>
   <% end %>
 
-  <% @invite.sorted_potential_teams_by_org.each do |org, teams| %>
+  <% @invite.potential_orgs_with_teams.sort.each do |org| %>
     <h2>@<%= org.login %></h2>
     <ul>
-      <% teams.each do |team| %>
+      <% org.teams.each do |team| %>
+        <%# exclude the Owners team %>
+        <% unless team.owners? %>
+          <li>
+            <%= f.button class: 'btn btn-default', name: 'invite[team_id]', value: team.id do %>
+              <%= team.name %>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+      <% if org.owner? %>
+        <%# has the ability to create other teams %>
         <li>
-          <%= f.button class: 'btn btn-default', name: 'invite[team_id]', value: team.id do %>
-            <%= team.name %>
-          <% end %>
+          <a href="https://github.com/orgs/<%= org.login %>/new-team" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus"></span>
+          </a>
         </li>
       <% end %>
-      <li>
-        <a href="https://github.com/orgs/<%= org.login %>/new-team" class="btn btn-default">
-          <span class="glyphicon glyphicon-plus"></span>
-        </a>
-      </li>
     </ul>
   <% end %>
 <% end %>
