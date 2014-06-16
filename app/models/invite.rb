@@ -28,8 +28,16 @@ class Invite < ActiveRecord::Base
     Organization.new(id: organization_id, login: organization_login)
   end
 
-  def add_to_team(other)
-    user.client.add_team_member(team_id, other.github_username)
+  def add_to_team(other_user)
+    user.client.add_team_member(team_id, other_user.github_username)
+  end
+
+  def expired?
+    created_at < 3.days.ago
+  end
+
+  def redeem(other_user)
+    !expired? && add_to_team(other_user)
   end
 
   def potential_teams_by_org
@@ -57,7 +65,8 @@ class Invite < ActiveRecord::Base
   end
 
   def update_info_if_team_changed
-    if team_id && team_id_changed?
+    changed = changed_attributes.keys
+    if team_id && changed.include?('team_id') && (%w(organization_id organization_login team_name) - changed).any?
       self.team = Team.from_api(team_id, user.client)
     end
   end

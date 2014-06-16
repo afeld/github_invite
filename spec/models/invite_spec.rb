@@ -25,6 +25,14 @@ describe Invite do
     end
   end
 
+  describe '#redeem' do
+    it "fails when the invite has expired" do
+      invite = create(:populated_invite, created_at: 10.days.ago)
+      user = create(:user)
+      expect(invite.redeem(user)).to eq(false)
+    end
+  end
+
   describe '#potential_teams_by_org' do
     let(:invite) { build(:invite) }
 
