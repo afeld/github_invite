@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'invites' do
   describe 'GET /:id' do
-    let(:invite) { create_invite }
+    let(:invite) { create(:populated_invite) }
 
     def visit_invite
       get "/#{invite.key}"
