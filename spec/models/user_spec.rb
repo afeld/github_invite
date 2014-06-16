@@ -5,7 +5,7 @@ describe User do
     let(:user) { create(:user) }
 
     it "includes all teams from orgs that the user owns" do
-      owners = create(:team, name: 'Owners')
+      owners = create(:owners_team)
       expect(user).to receive(:teams).and_return([owners])
 
       other = create(:team)
@@ -16,7 +16,7 @@ describe User do
     end
 
     it "only includes teams once" do
-      owners = create(:team, name: 'Owners')
+      owners = create(:owners_team)
       org = owners.organization
       other = create(:team, organization: org)
       expect(user).to receive(:teams).and_return([owners, other])
