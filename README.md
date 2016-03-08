@@ -37,4 +37,5 @@ bundle exec guard
 
 * https://developer.github.com/v3/orgs/teams/#add-team-member
 * https://github.com/benbalter/add-to-org
+* https://github.com/benbalter/squad_goals
 * https://github.com/education/teachers_pet/#giving-others-access
